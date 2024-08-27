@@ -44,6 +44,10 @@ on:
         description: 'Additional arguments to docker run when starting the build container. By default passes --platform <arch>'
         required: false
         type: string
+      extra-apt-preferences:
+        description: 'Additional apt preferences file'
+        required: false
+        type: string
       package-name:
         description: 'Name of the package being built'
         required: true
@@ -85,6 +89,7 @@ jobs:
           extra-docker-args: --platform ${{ inputs.arch }} ${{ inputs.extra-docker-args }}
           extra-repo-keys: ${{ inputs.extra-repo-keys }}
           extra-repos: ${{ inputs.extra-repos }}
+          extra-apt-preferences: ${{ inputs.extra-apt-preferences }}
           setup-hook: "apt update; apt install -y -q ${{ inputs.extra-packages }}"
 
       - name: Attest

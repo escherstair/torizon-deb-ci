@@ -44,6 +44,9 @@ on:
         description: 'Additional arguments to docker run when starting the build container. By default passes --platform <arch>'
         required: false
         type: string
+      extra-repo-keys:
+        description: 'Keys for the Extra APT repositories'
+        type: string
       extra-apt-preferences:
         description: 'Additional apt preferences file'
         required: false

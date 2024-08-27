@@ -40,6 +40,10 @@ on:
         description: 'Extra APT repositories to configure in the build environment (one-line-style or deb822-style format)'
         required: false
         type: string
+      extra-docker-args:
+        description: 'Additional arguments to docker run when starting the build container. By default passes --platform <arch>'
+        required: false
+        type: string
       package-name:
         description: 'Name of the package being built'
         required: true
@@ -72,13 +76,13 @@ jobs:
         if: ${{ inputs.arch != 'amd64' }} 
 
       - name: Build Debian Package
-        uses: jtdor/build-deb-action@v1
+        uses: torizon/build-deb-action@master
         with:
           apt-opts: ${{ inputs.apt-opts }}
           buildpackage-opts: ${{ inputs.buildpackage-opts }}
           docker-image: ${{ inputs.docker-image }}
           extra-build-deps: ${{ inputs.extra-build-deps }}
-          extra-docker-args: --platform ${{ inputs.arch }}
+          extra-docker-args: --platform ${{ inputs.arch }} ${{ inputs.extra-docker-args }}
           extra-repo-keys: ${{ inputs.extra-repo-keys }}
           extra-repos: ${{ inputs.extra-repos }}
           setup-hook: "apt update; apt install -y -q ${{ inputs.extra-packages }}"

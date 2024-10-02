@@ -70,6 +70,11 @@ on:
         description: 'Whether to save build artifacts or not'
         required: false
         type: boolean
+      before-build-hook:
+        description: 'Shell command(s) to be executed after installing the build dependencies and right before dpkg-buildpackage is executed.'
+        required: false
+        type: string
+
 
 jobs:
   build-debs:
@@ -94,6 +99,7 @@ jobs:
           extra-repos: ${{ inputs.extra-repos }}
           extra-apt-preferences: ${{ inputs.extra-apt-preferences }}
           setup-hook: "apt update; apt install -y -q ${{ inputs.extra-packages }}"
+          before-build-hook: ${{ inputs.before-build-hook }}
 
       - name: Attest
         uses: actions/attest-build-provenance@v1

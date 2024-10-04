@@ -120,7 +120,7 @@ jobs:
           retention-days: 90
 
       - name: Run piuparts test
-        uses: evgeni/action-piuparts@b6520bd02312076d3148b57ff3109dea1145bf0d
+        uses: evgeni/action-piuparts@0da7871135a7c12efdbcae89728c3a314ea8ccf3
         if: ${{ inputs.run-piuparts }}
         with:
           package: debian/artifacts/*.changes

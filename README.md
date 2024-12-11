@@ -37,7 +37,8 @@ Extra packages to be installed as build dependencies.
 Default `""`.
 
 ## `extra-packages`
-Extra packages to be installed in the build environment.
+Extra packages to be installed in the build environment. Space-separated list
+of packages.
 
 Default `""`.
 
@@ -46,10 +47,31 @@ Extra APT repositories to configure in the build environment (one-line-style or 
 
 Default `""`.
 
+## `extra-docker-args`
+Additional arguments to docker run when starting the build container.
+
+Default `""`.
+
+## `extra-repo-keys`
+Keys for the Extra APT repositories. Can alternatively be passed using
+`extra-repo-keys` with deb822-style.
+
+Default `""`.
+
+## `extra-apt-preferences`
+Additional apt preferences file.
+
+Default `""`.
+
 ## `package-name`
 **Required** Name of the package being built.
 
 Default `""`.
+
+## `runner-system`
+Runner system where the Github workflow is executed.
+
+Default `"ubuntu-latest"`.
 
 ## `run-attestation`
 Whether to run attestation to build artifacts or not after the build.
@@ -65,6 +87,12 @@ Default `true`.
 Whether to save build artifacts or not.
 
 Default `true`.
+
+## `before-build-hook`
+Shell command(s) to be executed after installing the build dependencies and
+right before dpkg-buildpackage is executed.
+
+Default `""`.
 
 
 ## Example usage
@@ -100,7 +128,7 @@ with:
   package-name: 'neofetch'
   distribution: 'bookworm'
   docker-image: 'debian:bookworm'
-extra-packages: ca-certificates
+extra-packages: ca-certificates dpkg-dev
 extra-repos: |
       Types: deb
       URIs: https://feeds.toradex.com/debian

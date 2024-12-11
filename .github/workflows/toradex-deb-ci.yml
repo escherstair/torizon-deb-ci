@@ -55,6 +55,11 @@ on:
         description: 'Name of the package being built'
         required: true
         type: string
+      runner-system:
+        description: 'Runner system where the workflow is executed'
+        required: false
+        type: string
+        default: 'ubuntu-latest'
       run-attestation:
         default: false
         description: 'Whether to run attestation to build artifacts or not after the build'
@@ -78,7 +83,7 @@ on:
 
 jobs:
   build-debs:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner-system }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
